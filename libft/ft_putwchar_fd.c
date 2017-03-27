@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putwchar_fd.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: voliynik <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/25 16:54:24 by voliynik          #+#    #+#             */
+/*   Updated: 2017/03/25 16:55:27 by voliynik         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
@@ -25,7 +36,7 @@ void	ft_putwchar_fd(wchar_t chr, int fd)
 	}
 }
 
-size_t  ft_wcharlen(wchar_t c)
+size_t	ft_wcharlen(wchar_t c)
 {
 	if (c <= 0x7F)
 		return (1);

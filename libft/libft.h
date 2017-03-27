@@ -6,7 +6,7 @@
 /*   By: voliynik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:56:53 by voliynik          #+#    #+#             */
-/*   Updated: 2017/03/17 18:12:26 by voliynik         ###   ########.fr       */
+/*   Updated: 2017/03/25 16:16:00 by voliynik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char				*ft_strnstr(const char *big, const char *little,
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
+long long			ft_atoi_ll(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);

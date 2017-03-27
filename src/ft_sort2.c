@@ -6,7 +6,7 @@
 /*   By: voliynik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 13:58:48 by voliynik          #+#    #+#             */
-/*   Updated: 2017/03/21 15:37:35 by voliynik         ###   ########.fr       */
+/*   Updated: 2017/03/25 16:41:44 by voliynik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int		ft_put_med_b(int **tab_a, int **tab_b, t_st *ps, int size)
 		return (ft_sort_less_6(tab_a, tab_b, size, ps));
 	while (i < size)
 	{
-		if (!ft_check_next_dig(tab_a, ps->med, size, 0))
+		if (!ft_check_next_dig_a(tab_a, ps->med, size - res, 0))
 			break ;
 		if ((*tab_a)[0] <= ps->med && ++res)
 			ft_put_dig_in_b(tab_a, tab_b, ps);
 		else if (++ps->rot)
-			ft_rotate(tab_a, ps->a_len, ps, 1);
+			ft_rotate_a(tab_a, tab_b, ps, 1);
 		i++;
 	}
 	if (tmp == size)
@@ -43,22 +43,21 @@ int		ft_put_if_less_3_b(int **tab_a, int **tab_b, size_t size, t_st *ps)
 {
 	if (size <= 3 && size > 0)
 	{
-		ps->car += size;
 		if (size >= 2)
 		{
-			if ((*tab_b)[0] > (*tab_b)[1] &&
+			if (size == 3 && (*tab_b)[0] > (*tab_b)[1] &&
 					(*tab_b)[0] > (*tab_b)[2] && size--)
 				ft_put_dig_in_a(tab_b, tab_a, ps);
-			if ((*tab_b)[0] < (*tab_b)[1])
-				ft_swap_first(tab_b, ps, 2);
+			if ((*tab_b)[0] < (*tab_b)[1] && size >= 2)
+				ft_swap_first_b(tab_b, tab_a, ps, 2);
 			if (size == 3 && ps->b_len > 2 && ((*tab_b)[1] < (*tab_b)[2]))
 			{
-				ft_rotate(tab_b, ps->b_len, ps, 2);
-				ft_swap_first(tab_b, ps, 2);
-				ft_rotate_rev(tab_b, ps->b_len, ps, 2);
+				ft_rotate_b(tab_b, tab_a, ps, 2);
+				ft_swap_first_b(tab_b, tab_a, ps, 2);
+				ft_rotate_rev_b(tab_b, tab_a, ps, 2);
 			}
-			if ((*tab_b)[0] < (*tab_b)[1])
-				ft_swap_first(tab_b, ps, 2);
+			if ((*tab_b)[0] < (*tab_b)[1] && size >= 2)
+				ft_swap_first_b(tab_b, tab_a, ps, 2);
 		}
 		while (size--)
 			ft_put_dig_in_a(tab_b, tab_a, ps);
@@ -79,15 +78,18 @@ void	ft_check_b_a(int **tab_a, int **tab_b, int size, t_st *ps)
 		ft_calc_med(*tab_b, size, ps);
 		res2 = ft_put_med_a(tab_a, tab_b, ps, size);
 		while (ps->rot--)
-			ft_rotate_rev(tab_b, ps->b_len, ps, 2);
-		ps->rot = 0; // chaeck
-		while (ps->rot--)
-			ft_rotate_rev(tab_b, ps->b_len, ps, 2);
-		ft_check_a_b(tab_a, tab_b, res2, ps);
-		ft_check_b_a(tab_a, tab_b, size - res2, ps);
+			ft_rotate_rev_b(tab_b, tab_a, ps, 2);
+		if (res2 >= 4 || size - res2 >= 4)
+			ft_check_a_b(tab_a, tab_b, res2, ps);
+		if (res2 && size - res2 >= 4)
+			ft_check_b_a(tab_a, tab_b, size - res2, ps);
+		else
+			size -= res2;
 	}
+	ps->a_tmp_len = size;
+	ps->b_tmp_len = res2;
+	if (size <= 3 && res2 <= 3 && size > 0 && res2 > 0)
+		ft_check_and_put_b(tab_a, tab_b, ps);
 	if (ft_put_if_less_3_b(tab_a, tab_b, size, ps))
-		return ;
-	else if (size <= 0)
 		return ;
 }

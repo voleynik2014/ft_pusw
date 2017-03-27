@@ -6,7 +6,7 @@
 #    By: voliynik <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 16:30:03 by voliynik          #+#    #+#              #
-#    Updated: 2017/03/17 19:07:01 by voliynik         ###   ########.fr        #
+#    Updated: 2017/03/25 15:27:23 by voliynik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,21 +14,25 @@ NAME = push_swap
 NAMELIB = libft.a
 NAMECHECKER = checker
 
-SRC	=	ft_p_s.c \
+SRC	=	ft_put.c \
+		ft_p_s.c \
 		ft_swap.c \
 		ft_support.c \
 		ft_support2.c \
+		ft_support3.c \
 		ft_rotate.c \
-		ft_put.c \
+		ft_rotate2.c \
 		ft_second_solution.c \
 		ft_sort.c \
-		ft_sort2.c \
+		ft_sort2.c 
 
-SRC2	= ft_checker.c \
-		  ft_swap.c \
-		  ft_put.c \
-		  ft_rotate.c \
-		  ft_support.c
+SRC2 =	ft_checker.c \
+		ft_swap.c \
+		ft_put.c \
+		ft_rotate.c \
+		ft_rotate2.c \
+		ft_support3.c \
+		ft_support.c
 
 OBJ		= $(addprefix $(OBJDIR), $(SRC:.c=.o))
 OBJ2	= $(addprefix $(OBJDIR), $(SRC2:.c=.o))
@@ -65,6 +69,7 @@ $(NAMECHECKER): $(OBJ2)
 
 $(NAMELIB):
 	@cd $(LIBDIR); make; make clean; mv $(NAMELIB) ../;
+	@printf '\n'
 
 clean:
 	@echo "Delete old obj"
